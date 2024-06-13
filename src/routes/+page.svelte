@@ -71,9 +71,9 @@
 					<div>loading</div>
 				</div>
 			{:else if loadedcontent}
-				<div class="border rounded-lg border-[#353535] bg-[#171717]">
+				<div class="w-96 border rounded-lg border-[#353535] bg-[#171717]">
 					<img src={thumbnail} alt={title} class="rounded-md rounded-b-sm" />
-					<div class="p-2 text-center">
+					<div class="p-2 text-center truncate">
 						{title}
 					</div>
 					<div class="flex gap-2 justify-center">
