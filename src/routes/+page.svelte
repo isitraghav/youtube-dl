@@ -1,21 +1,26 @@
 <script>
 	import axios from 'axios';
 
-	let link,
-		loading = false,
-		loadedcontent = false;
+	let link, link_id;
+	let loading = false;
+	let loadedcontent = false;
 	let thumbnail,
 		title,
 		videoUrl = [];
 	async function download() {
+		videoUrl = []
 		loading = true;
-		if (!link.includes('youtube.com/watch?v=')) {
-			loading = false
-			alert('not a youtube url, copy it from the address bar')
-			return
+		if (link.includes('youtube.com/watch?v=')) {
+			link_id = link.split('watch?v=')[1].split('&')[0];
+		} else if (link.includes('youtu.be/')) {
+			link_id = link.split('youtu.be/')[1].split('?')[0];
+		} else {
+			alert('not youtube url');
+			loading = false;
+			return;
 		}
 		await axios
-			.get('/api?v=' + link.split('watch?v=')[1].split('&')[0])
+			.get('/api?v=' + link_id)
 			.then((res) => {
 				let data = res.data;
 				thumbnail = data.videoDetails.thumbnails[data.videoDetails.thumbnails.length - 1].url;
