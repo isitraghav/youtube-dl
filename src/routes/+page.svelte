@@ -9,6 +9,11 @@
 		videoUrl = [];
 	async function download() {
 		loading = true;
+		if (!link.includes('youtube.com/watch?v=')) {
+			loading = false
+			alert('not a youtube url, copy it from the address bar')
+			return
+		}
 		await axios
 			.get('/api?v=' + link.split('watch?v=')[1].split('&')[0])
 			.then((res) => {
